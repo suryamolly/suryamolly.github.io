@@ -27,7 +27,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://suryamouly.github.io/Surya_Mouly_Portfolio/",
+    url: "https://suryamouly.in",
     title: "Surya Mouly | Staff Engineer & Mobile App Architect",
     description:
       "Staff Engineer @ Nagarro specializing in Flutter, Android, Samsung ONE UI, and enterprise mobile system architecture.",
