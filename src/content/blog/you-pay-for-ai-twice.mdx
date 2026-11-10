@@ -1,0 +1,115 @@
+export const metadata = {
+  title: "You're Paying for AI Twice. The Second Bill Is Your Know-How.",
+  description: "The Reverse Information Paradox, and why the most valuable thing you give an AI isn't your data. It's your corrections.",
+  date: "2026-11-07",
+  tags: ["AI", "Enterprise AI", "Architecture", "Data Privacy"],
+}
+
+![What AI flipped](/blog/you-pay-for-ai-twice/hero.jpg)
+
+<p className="text-center text-xs text-zinc-500 -mt-4">Photo by [Sasun Bughdaryan](https://unsplash.com/@sasun1990?utm_source=medium&utm_medium=referral) on [Unsplash](https://unsplash.com?utm_source=medium&utm_medium=referral)</p>
+
+If you've ever built an enterprise AI proof-of-concept, you'll know this moment.
+
+The demo is in two weeks. The model is *almost* there. So the team sits with the client's domain experts and starts correcting it. "No, in our process the approval always comes before the payout." "That's not how we classify this kind of customer." "We never phrase it like that with a regulator."
+
+Every correction makes the output sharper. By demo day the stakeholders are impressed, and everyone feels good.
+
+Nobody in the room asks the obvious question: **where did all that judgment just go?**
+
+In July 2026, Microsoft CEO Satya Nadella gave this problem a name: the **Reverse Information Paradox**. I think it's one of the most useful ideas for anyone building or buying AI right now, so here's my take on it, from the engineering side of the table.
+
+## A 1962 idea, turned upside down
+
+To understand the reverse, you need the original.
+
+In 1962, the economist Kenneth Arrow pointed out a strange problem with selling information. A buyer can't know what an idea is worth until they've seen it. But once they've seen it, they already have it, so why would they pay?
+
+Think of a consultant who walks into your office and says, "I know exactly how to cut your cloud bill by 40%." You want to hear it before you sign. But if they explain it before you sign, you no longer need them. In Arrow's world, **the seller carries the risk**. To make the sale, they have to reveal the very thing they're selling.
+
+Society's partial answer was the patent. It lets inventors disclose an idea publicly without simply giving it away.
+
+## What AI flipped
+
+Nadella's argument, published as an essay on X on 12 July 2026, is that AI runs this paradox in reverse.
+
+When you buy intelligence from a model provider, **the buyer now carries the risk**. A general-purpose model doesn't know your business. To make it useful, you have to pour your business into it: your workflows, your edge cases, your definitions of "good," your institutional memory.
+
+So you pay twice:
+
+1. **Once in money:** licences, tokens, compute.
+2. **Once in knowledge:** the proprietary know-how you reveal to make the model perform.
+
+And the more you want the model to do, the more of that second currency you spend. Over months and years, the information asymmetry quietly moves from you to the provider.
+
+## It's not your data. It's your exhaust.
+
+This is the part I think most people miss.
+
+In the cloud era, we learned to protect **data at rest**: encryption, residency, access control. Those are solved problems, more or less. But a model doesn't only learn from the documents you upload. It learns from the *exhaust* of using it:
+
+- the prompts your teams write
+- the tools and APIs the agent calls, and in what order
+- the evaluations you run to decide what "good" looks like
+- and above all, **the corrections**
+
+As an engineer, here's how I'd put it: **a correction is a labelled training example, created by your most expensive expert, for free.** When a senior underwriter tells the model "no, that's wrong, and here's why," they're encoding years of judgment into a single sentence. That judgment is exactly what your competitors can't buy. And it's leaving the building one chat at a time.
+
+|                       | Cloud era                 | AI era                                 |
+| --------------------- | ------------------------- | -------------------------------------- |
+| **What leaks**        | Data                      | Know-how                               |
+| **Where it sits**     | Storage, databases        | Prompts, traces, evals, corrections    |
+| **How it's protected**| Encryption, residency     | Still being figured out                |
+| **Who notices**       | Security teams            | Almost nobody                          |
+
+## Nadella's five Cs, translated for builders
+
+Nadella proposes five actions for enterprises. Here's what each one means when you're actually drawing the architecture diagram:
+
+**1. Control.** Own your evaluation pipeline, your traces and your feedback. *In practice:* your golden test sets, prompt libraries and correction logs live in **your** repo and **your** tenant, not only inside a vendor's console.
+
+**2. Capability.** Fine-tune or train within your own tenant boundary. *In practice:* if the model is going to learn your business, it should learn it in an environment you control.
+
+**3. Choice.** Decouple your orchestration layer from any single model. *In practice:* put an abstraction between your app and the model API. If switching models means rewriting your prompts, evals and agent logic from scratch, you're not a customer. You're locked in.
+
+**4. Cost.** Keep orchestration independent so you can route each task to the cheapest model that does it well. *In practice:* not every request needs the frontier model. A small model plus good context often wins.
+
+**5. Compound.** Wire the first four into a loop, so every interaction makes **your** system smarter, not just the provider's.
+
+The common thread: **the intelligence you rent should be replaceable. The knowledge you build should not.**
+
+## What I'd tell a client tomorrow
+
+If you're starting an AI initiative this quarter, here's a short checklist:
+
+- **Read the data-use terms like a lawyer would.** Check training opt-outs, retention periods, and who can see your logs.
+- **Treat correction logs as IP.** Store them, version them, back them up. They're the most valuable dataset your AI project will produce.
+- **Keep knowledge in retrieval, not just in weights.** Approaches like RAG and knowledge graphs keep your know-how in a store you own, which you can point at whatever model you choose.
+- **Build your eval set before your first prompt.** Whoever owns the definition of "good" owns the project.
+- **Design for a model swap on day one,** even if you never do one.
+
+## A fair counterpoint
+
+It's worth reading this with a little skepticism too.
+
+Microsoft sells enterprise AI, private tenants and an orchestration platform. So the Reverse Information Paradox is a real insight, but it's also good positioning for the company that coined it.
+
+And sharing isn't always a loss. Models get better partly because people use them, and everyone benefits from that. Many enterprise agreements already exclude customer data from training by default. But training is only one channel. The prompts, workflows and evaluations you build inside one vendor's tooling are a form of dependence even when no data is ever used to train anything.
+
+The point isn't to stop using AI. It's to use it with your eyes open.
+
+## The patent of the AI era
+
+Arrow's paradox eventually got its partial fix in the patent system. The Reverse Information Paradox doesn't have one yet. No law, contract clause or standard fully protects the judgment that flows out of a company through everyday AI use.
+
+Until that exists, the protection is **architecture**: where your traces live, who owns your evals, how easily you can walk away.
+
+So the next time your team spends a week teaching a model how your business really works, ask the question nobody asked in that demo room:
+
+**Who gets to keep what we just taught it?**
+
+---
+
+*Sources: Satya Nadella, "The Reverse Information Paradox" (essay on X, July 2026), as reported by Business Standard, Business Today and StartupHub.ai; Kenneth Arrow, "Economic Welfare and the Allocation of Resources for Invention" (1962).*
+
+*Originally published on [Medium](https://medium.com/@suryamouly/you-pay-for-ai-twice-ed87e04831fc).*

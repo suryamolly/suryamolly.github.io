@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -66,4 +67,24 @@ body {
   background-image: 
     linear-gradient(to right, rgba(0, 0, 0, 0.04) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+}
+
+/* Blog code blocks (rehype-pretty-code with light + dark Shiki themes) */
+[data-rehype-pretty-code-figure] pre {
+  overflow-x: auto;
+  padding: 1rem 0;
+  border-radius: 0.75rem;
+}
+[data-rehype-pretty-code-figure] code {
+  display: grid;
+  font-size: 0.85rem;
+}
+[data-rehype-pretty-code-figure] [data-line] {
+  padding: 0 1.25rem;
+}
+[data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-light);
+}
+.dark [data-rehype-pretty-code-figure] code span {
+  color: var(--shiki-dark);
 }

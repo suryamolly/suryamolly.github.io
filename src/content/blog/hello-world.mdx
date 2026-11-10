@@ -1,0 +1,50 @@
+export const metadata = {
+  title: "How to write a post on this blog",
+  description: "A template post showing the metadata block, formatting, and code highlighting. Marked as a draft, so it never ships to production.",
+  date: "2026-11-10",
+  tags: ["meta", "template"],
+  draft: true,
+}
+
+This is a **draft** template. It shows up when you run `pnpm dev`, but production builds skip it. Copy this file to start a new post.
+
+## Creating a post
+
+1. Add a file to `src/content/blog/`. The file name becomes the URL, so `my-post.mdx` is served at `/blog/my-post/`.
+2. Start it with an `export const metadata = { ... }` block with `title`, `description`, `date` and optional `tags`.
+3. Remove `draft: true` (or set it to `false`) when it's ready, then push to `main`.
+
+## Formatting
+
+Regular Markdown works: *italics*, **bold**, [links](https://suryamouly.in), `inline code`, and quotes.
+
+> Good architecture makes the next change cheap.
+
+Tables work too, thanks to GitHub-flavored Markdown:
+
+| Layer        | Responsibility            |
+| ------------ | ------------------------- |
+| Presentation | Widgets, state            |
+| Domain       | Use cases, entities       |
+| Data         | Repositories, API clients |
+
+## Code
+
+Code blocks are highlighted at build time, so no JavaScript is sent to the reader:
+
+```dart
+class GetUserProfile {
+  GetUserProfile(this._repository);
+
+  final UserRepository _repository;
+
+  Future<UserProfile> call(String id) => _repository.fetchProfile(id);
+}
+```
+
+```kotlin
+@Composable
+fun Greeting(name: String) {
+    Text(text = "Hello, $name!")
+}
+```
