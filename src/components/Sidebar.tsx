@@ -10,7 +10,6 @@ import {
   Menu,
   X,
   MapPin,
-  Sparkles,
   ArrowUpRight,
   Briefcase,
 } from "lucide-react";

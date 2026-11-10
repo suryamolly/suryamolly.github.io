@@ -71,7 +71,7 @@ export default function RootLayout({
       "@type": "CollegeOrUniversity",
       name: "IIMT College of Engineering / Uttar Pradesh Technical University",
     },
-    url: "https://suryamouly.github.io/Surya_Mouly_Portfolio/",
+    url: "https://suryamouly.in",
     sameAs: [
       "https://www.linkedin.com/in/suryamouly",
       "https://github.com/suryamolly",
