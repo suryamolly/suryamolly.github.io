@@ -88,3 +88,104 @@ body {
 .dark [data-rehype-pretty-code-figure] code span {
   color: var(--shiki-dark);
 }
+
+/* Blog article typography (on top of @tailwindcss/typography) */
+.blog-prose {
+  --tw-prose-links: #0284c7;
+  --tw-prose-invert-links: #38bdf8;
+}
+.blog-prose :where(p, li) {
+  line-height: 1.8;
+}
+.blog-prose :where(h2) {
+  margin-top: 1.9em;
+  padding-top: 1.1em;
+  border-top: 1px solid var(--card-border);
+  letter-spacing: -0.02em;
+  scroll-margin-top: 6rem;
+}
+.blog-prose :where(h3) {
+  scroll-margin-top: 6rem;
+}
+.blog-prose :where(a) {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 3px;
+  font-weight: 500;
+}
+.blog-prose :where(strong) {
+  color: var(--foreground);
+}
+.blog-prose :where(blockquote) {
+  border-left: 3px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border-radius: 0 0.75rem 0.75rem 0;
+  padding: 0.9em 1.25em;
+  font-style: normal;
+  font-weight: 500;
+}
+.blog-prose :where(blockquote p:first-of-type)::before,
+.blog-prose :where(blockquote p:last-of-type)::after {
+  content: none;
+}
+.blog-prose :where(table) {
+  width: 100%;
+  font-size: 0.9em;
+  border: 1px solid var(--card-border);
+  border-radius: 0.75rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.blog-prose :where(thead th) {
+  background: color-mix(in srgb, var(--muted) 10%, transparent);
+  padding: 0.75em 1em;
+}
+.blog-prose :where(tbody td) {
+  padding: 0.75em 1em;
+}
+/* Let wide tables scroll sideways on phones instead of breaking the page */
+@media (max-width: 640px) {
+  .blog-prose :where(table) {
+    display: block;
+    overflow-x: auto;
+  }
+}
+/* Fully italic notes after a divider (sources, "originally published") read as footnotes */
+.blog-prose hr ~ p:has(> em:only-child) {
+  font-size: 0.85em;
+  line-height: 1.7;
+  color: var(--muted);
+  margin: 0.6em 0;
+}
+.blog-prose :where(ol > li)::marker,
+.blog-prose :where(ul > li)::marker {
+  color: var(--accent);
+}
+.blog-prose :where(hr) {
+  border-color: var(--card-border);
+}
+.blog-prose :where(:not(pre) > code) {
+  padding: 0.15em 0.4em;
+  border-radius: 0.375rem;
+  background: color-mix(in srgb, var(--muted) 15%, transparent);
+  font-weight: 500;
+}
+.blog-prose :where(:not(pre) > code)::before,
+.blog-prose :where(:not(pre) > code)::after {
+  content: none;
+}
+
+/* Language label on code blocks */
+[data-rehype-pretty-code-figure] {
+  position: relative;
+}
+[data-rehype-pretty-code-figure] pre[data-language]::before {
+  content: attr(data-language);
+  position: absolute;
+  top: 0.6rem;
+  right: 0.9rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
